@@ -4,17 +4,28 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.com.tokiomarine.seguradora.avaliacao.entidade.Estudante;
 import br.com.tokiomarine.seguradora.avaliacao.repository.EstudanteRepository;
 
-// TODO Efetue a implementação dos métodos da classe service
+@Service
 public class EstudanteServiceImpl implements EstudandeService {
 
-	EstudanteRepository repository;
+	@Autowired
+	private EstudanteRepository repository;
 
 	@Override
-	public void cadastrarEstudante(@Valid Estudante estudante) throws Exception{
+	public void cadastrarEstudante(@Valid Estudante estudante){
 		
+		try {
+			repository.saveAndFlush(estudante);
+			
+		} catch (Exception e) {
+			throw e;
+		}
+				
 	}
 
 	@Override
