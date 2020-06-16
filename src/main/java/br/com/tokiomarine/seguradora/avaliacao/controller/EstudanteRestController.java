@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -62,6 +63,23 @@ public class EstudanteRestController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
+	
+	@DeleteMapping(path="deletar-estudante/{id}")
+	public ResponseEntity<?> deletarEstudante(@Valid @PathVariable Long id) {
+		
+		try {
+			
+			estudanteService.excluirEstudante(id); 
+			
+			return ResponseEntity.ok().build();
+			
+			
+		} catch (Exception e) {
+			
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+	
 	
 	
 }
