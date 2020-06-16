@@ -13,8 +13,8 @@ public class EstudanteServiceImpl implements EstudandeService {
 	EstudanteRepository repository;
 
 	@Override
-	public void cadastrarEstudante(@Valid Estudante estudante) {
-
+	public void cadastrarEstudante(@Valid Estudante estudante) throws Exception{
+		
 	}
 
 	@Override
