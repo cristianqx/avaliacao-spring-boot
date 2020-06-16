@@ -1,1 +1,1 @@
---EFETUE A CRIACAO DOS SCRIPTS QUE IRAO FAZER A CARGA DOS DADOS
+INSERT INTO estudante(id, nome, email, telefone, matricula, curso) VALUES (1, 'Xawoy','xawoy@tms.com.br','7777','123456','Engenharia da Computação'), (2, 'Furae','furae@tms.com.br','7778','678912','Ciência da Computação'),(3, 'Fupuy','fupuy@tms.com.br','7779','321654','Engenharia da Computação'),(4, 'Kuer','kuer@tms.com.br','7780','654987','Análise de Dados'),(5, 'Blias','blias@tms.com.br','7781','666131','Ciência da Computação');
