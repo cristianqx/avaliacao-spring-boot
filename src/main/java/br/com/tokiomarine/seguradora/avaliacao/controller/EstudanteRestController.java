@@ -1,11 +1,14 @@
 package br.com.tokiomarine.seguradora.avaliacao.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,7 +20,7 @@ import br.com.tokiomarine.seguradora.avaliacao.entidade.Estudante;
 import br.com.tokiomarine.seguradora.avaliacao.service.EstudanteServiceImpl;
 
 @RestController
-@RequestMapping("/estudantes/")
+@RequestMapping("/estudantes")
 public class EstudanteRestController {
 
 	// TODO caso você não conheça THEMELEAF faça a implementação dos métodos em forma de RESTCONTROLLER 
@@ -35,7 +38,7 @@ public class EstudanteRestController {
 	private EstudanteServiceImpl estudanteService;
 	
 	
-	@PostMapping(path="cadastrar-estudante")
+	@PostMapping(path="/cadastrar-estudante")
 	public ResponseEntity<?> cadastrarEstudante(@Valid @RequestBody Estudante estudante) {
 		try {
 			
@@ -48,7 +51,7 @@ public class EstudanteRestController {
 		}
 	}
 	
-	@PutMapping(path="atualizar-estudante")
+	@PutMapping(path="/atualizar-estudante")
 	public ResponseEntity<?> atualizarEstudante(@Valid @RequestBody Estudante estudante) {
 		
 		try {
@@ -64,7 +67,7 @@ public class EstudanteRestController {
 		}
 	}
 	
-	@DeleteMapping(path="deletar-estudante/{id}")
+	@DeleteMapping(path="/deletar-estudante/{id}")
 	public ResponseEntity<?> deletarEstudante(@Valid @PathVariable Long id) {
 		
 		try {
@@ -80,6 +83,20 @@ public class EstudanteRestController {
 		}
 	}
 	
-	
+	@GetMapping(path="/buscar-estudantes")
+	public ResponseEntity<List<Estudante>> obterListaEstudantes() {
+		
+		try {
+			final List<Estudante> estudantesRetornados = estudanteService.buscarEstudantes();
+			
+			return new ResponseEntity<List<Estudante>>(estudantesRetornados, HttpStatus.OK);
+			
+			
+		} catch (Exception e) {
+			
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+
+		}
+	}
 	
 }

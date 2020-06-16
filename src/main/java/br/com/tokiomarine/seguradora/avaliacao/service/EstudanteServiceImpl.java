@@ -1,5 +1,6 @@
 package br.com.tokiomarine.seguradora.avaliacao.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,7 +54,17 @@ public class EstudanteServiceImpl implements EstudandeService {
 
 	@Override
 	public List<Estudante> buscarEstudantes() {
-		return null;
+		
+		List<Estudante> estudante = new ArrayList<>();
+				
+		try {
+			estudante = repository.findAll();
+
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return estudante;
 	}
 
 	@Override
