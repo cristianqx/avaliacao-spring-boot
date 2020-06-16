@@ -40,9 +40,12 @@ public class EstudanteServiceImpl implements EstudandeService {
 			if(dadosEstudante.isPresent()) {
 				
 				Estudante dadosAtualizados = dadosEstudante.get();
+				
 				dadosAtualizados.setEmail(estudante.getEmail());
 				dadosAtualizados.setTelefone(estudante.getTelefone());
 				dadosAtualizados.setNome(estudante.getNome());
+				dadosAtualizados.setMatricula(estudante.getMatricula());
+				dadosAtualizados.setCurso(estudante.getCurso());
 				repository.saveAndFlush(dadosAtualizados);
 				
 			}
