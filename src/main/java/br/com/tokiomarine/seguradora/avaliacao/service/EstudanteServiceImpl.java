@@ -1,6 +1,7 @@
 package br.com.tokiomarine.seguradora.avaliacao.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -30,7 +31,24 @@ public class EstudanteServiceImpl implements EstudandeService {
 
 	@Override
 	public void atualizarEstudante(@Valid Estudante estudante) {
-
+		
+		try {
+			
+			Optional<Estudante> dadosEstudante = repository.findById(estudante.getId());
+			
+			if(dadosEstudante.isPresent()) {
+				
+				Estudante dadosAtualizados = dadosEstudante.get();
+				dadosAtualizados.setEmail(estudante.getEmail());
+				dadosAtualizados.setTelefone(estudante.getTelefone());
+				dadosAtualizados.setNome(estudante.getNome());
+				repository.saveAndFlush(dadosAtualizados);
+				
+			}
+			
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	@Override

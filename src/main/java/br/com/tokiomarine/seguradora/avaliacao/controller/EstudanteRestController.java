@@ -5,7 +5,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +16,7 @@ import br.com.tokiomarine.seguradora.avaliacao.entidade.Estudante;
 import br.com.tokiomarine.seguradora.avaliacao.service.EstudanteServiceImpl;
 
 @RestController
-@RequestMapping("/estudantes")
+@RequestMapping("/estudantes/")
 public class EstudanteRestController {
 
 	// TODO caso você não conheça THEMELEAF faça a implementação dos métodos em forma de RESTCONTROLLER 
@@ -32,8 +34,8 @@ public class EstudanteRestController {
 	private EstudanteServiceImpl estudanteService;
 	
 	
-	@PostMapping(path="cadastro-estudante")
-	public ResponseEntity<?> cadastroAluno(@Valid @RequestBody final Estudante estudante) {
+	@PostMapping(path="cadastrar-estudante")
+	public ResponseEntity<?> cadastrarEstudante(@Valid @RequestBody Estudante estudante) {
 		try {
 			
 			estudanteService.cadastrarEstudante(estudante);
@@ -41,6 +43,22 @@ public class EstudanteRestController {
 			return ResponseEntity.ok().build();
 			
 		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+	
+	@PutMapping(path="atualizar-estudante")
+	public ResponseEntity<?> atualizarEstudante(@Valid @RequestBody Estudante estudante) {
+		
+		try {
+			
+			estudanteService.atualizarEstudante(estudante); 
+			
+			return ResponseEntity.ok().build();
+			
+			
+		} catch (Exception e) {
+			
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}

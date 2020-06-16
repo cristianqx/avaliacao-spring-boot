@@ -26,7 +26,6 @@ public class Estudante implements Serializable {
 	@NotNull
 	private String email;
 	
-
 	private String telefone;
 
 
