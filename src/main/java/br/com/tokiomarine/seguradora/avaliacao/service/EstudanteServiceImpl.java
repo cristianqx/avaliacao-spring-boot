@@ -71,18 +71,17 @@ public class EstudanteServiceImpl implements EstudandeService {
 	}
 
 	@Override
-	public void excluirEstudante(@Valid Long id) {
+	public Optional<Estudante> excluirEstudante(@Valid Long id) {
 		
-		try {
-			Optional<Estudante> dadosEstudante = repository.findById(id);
-			
-			if(dadosEstudante.isPresent()) {
-				repository.delete(dadosEstudante.get());
-			}
-			
-		} catch (Exception e) {
-			throw e;
+		Optional<Estudante> dadosEstudante = repository.findById(id);
+		
+		if(dadosEstudante.isPresent()) {
+			repository.delete(dadosEstudante.get());
+			return dadosEstudante;
+		} else {
+			return Optional.empty();
 		}
+			
 	}
 
 }

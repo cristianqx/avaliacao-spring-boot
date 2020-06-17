@@ -17,5 +17,5 @@ public interface EstudandeService {
 
 	Optional<Estudante> atualizarEstudante(@Valid Long id, @Valid Estudante estudante);
 	
-	void excluirEstudante(@Valid Long id);
+	Optional<Estudante> excluirEstudante(@Valid Long id);
 }

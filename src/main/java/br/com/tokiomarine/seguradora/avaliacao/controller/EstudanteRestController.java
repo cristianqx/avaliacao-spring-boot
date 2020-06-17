@@ -62,18 +62,15 @@ public class EstudanteRestController {
 	@DeleteMapping(path="/deletar-estudante/{id}")
 	@ApiOperation(value="Remove um estudante cadastrado")
 	public ResponseEntity<?> deletarEstudante(@Valid @PathVariable Long id) {
-		
-		try {
 			
-			estudanteService.excluirEstudante(id); 
+		Optional<Estudante> estudanteRetorno = estudanteService.excluirEstudante(id); 
 			
+		if(estudanteRetorno.isPresent()) {
 			return ResponseEntity.ok().build();
-			
-			
-		} catch (Exception e) {
-			
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
+		
+		return ResponseEntity.notFound().build();
+	
 	}
 	
 	@GetMapping(path="/buscar-estudantes")
