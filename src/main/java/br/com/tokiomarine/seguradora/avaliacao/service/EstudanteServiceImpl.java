@@ -66,8 +66,15 @@ public class EstudanteServiceImpl implements EstudandeService {
 	}
 
 	@Override
-	public Estudante buscarEstudante(long id) {
-		throw new IllegalArgumentException("Identificador inválido:" + id);
+	public Optional<Estudante> buscarEstudante(Long id) {
+		
+		Optional<Estudante> dadosAtuais = repository.findById(id);
+		
+		if(dadosAtuais.isPresent()) {
+			return dadosAtuais;
+		} else {
+			return Optional.empty();
+		}
 	}
 
 	@Override

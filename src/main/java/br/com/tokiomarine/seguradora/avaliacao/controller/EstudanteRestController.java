@@ -73,6 +73,20 @@ public class EstudanteRestController {
 	
 	}
 	
+	@GetMapping(path="/buscar-estudante/{id}")
+	@ApiOperation(value="Retorna dados de um estudante cadastrado")
+	public ResponseEntity<Optional<Estudante>> obterDadosEstudante(@Valid @PathVariable Long id) {
+		
+		Optional<Estudante> estudanteRetorno = estudanteService.buscarEstudante(id);
+		
+		if(estudanteRetorno.isPresent()) {
+			return ResponseEntity.ok().body(estudanteRetorno);
+		} 
+		
+		return ResponseEntity.notFound().build();
+	
+	}
+	
 	@GetMapping(path="/buscar-estudantes")
 	@ApiOperation(value="Retorna uma lista de estudantes cadastrados")
 	public ResponseEntity<List<Estudante>> obterListaEstudantes() {

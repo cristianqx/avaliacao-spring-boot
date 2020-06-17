@@ -13,9 +13,10 @@ public interface EstudandeService {
 
 	void cadastrarEstudante(@Valid Estudante estudante);
 
-	Estudante buscarEstudante(long id);
+	Optional<Estudante> buscarEstudante(Long id);
 
 	Optional<Estudante> atualizarEstudante(@Valid Long id, @Valid Estudante estudante);
 	
 	Optional<Estudante> excluirEstudante(@Valid Long id);
+
 }

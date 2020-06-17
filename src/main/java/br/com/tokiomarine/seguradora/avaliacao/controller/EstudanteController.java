@@ -1,5 +1,7 @@
 package br.com.tokiomarine.seguradora.avaliacao.controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -44,7 +46,7 @@ public class EstudanteController {
 
 	@GetMapping("editar/{id}")
 	public String exibirEdicaoEstudante(long id, Model model) {
-		Estudante estudante = service.buscarEstudante(id);
+		Optional<Estudante> estudante = service.buscarEstudante(id);
 		model.addAttribute("estudante", estudante);
 		return "atualizar-estudante";
 	}
