@@ -1,1 +1,5 @@
 Cristian Baptistella Coelho
+
+Como não tenho conhecimentos em thymeleaf, segui as regras mencionadas na classe EstudantesRestController
+e implementei os serviços conforme solicitados. As API's estão documentadas com swagger para facilitar
+a visualização dos mesmos.
