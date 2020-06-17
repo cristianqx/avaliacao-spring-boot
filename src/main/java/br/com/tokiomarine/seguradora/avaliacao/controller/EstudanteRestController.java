@@ -1,6 +1,7 @@
 package br.com.tokiomarine.seguradora.avaliacao.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -48,17 +49,14 @@ public class EstudanteRestController {
 	@ApiOperation(value="Atualiza dados de um estudante já cadastrado")
 	public ResponseEntity<?> atualizarEstudante(@Valid @PathVariable Long id, @Valid @RequestBody Estudante estudante) {
 		
-		try {
-			
-			estudanteService.atualizarEstudante(id, estudante); 
-			
+		Optional<Estudante> estudanteRetorno = estudanteService.atualizarEstudante(id, estudante); 
+		
+		if(estudanteRetorno.isPresent()) {
 			return ResponseEntity.ok().build();
-			
-			
-		} catch (Exception e) {
-			
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
+		
+		return ResponseEntity.notFound().build();
+		
 	}
 	
 	@DeleteMapping(path="/deletar-estudante/{id}")

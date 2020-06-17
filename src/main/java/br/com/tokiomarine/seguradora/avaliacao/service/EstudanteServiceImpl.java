@@ -31,27 +31,22 @@ public class EstudanteServiceImpl implements EstudandeService {
 	}
 
 	@Override
-	public void atualizarEstudante(@Valid Long id, @Valid Estudante estudante) {
+	public Optional<Estudante> atualizarEstudante(@Valid Long id, @Valid Estudante estudante) {
 		
-		try {
+		Optional<Estudante> dadosEstudante = repository.findById(id);
+		
+		if(dadosEstudante.isPresent()) {
 			
-			Optional<Estudante> dadosEstudante = repository.findById(id);
+			Estudante dadosAtualizados = dadosEstudante.get();
 			
-			if(dadosEstudante.isPresent()) {
-				
-				Estudante dadosAtualizados = dadosEstudante.get();
-				
-				dadosAtualizados.setEmail(estudante.getEmail());
-				dadosAtualizados.setTelefone(estudante.getTelefone());
-				dadosAtualizados.setNome(estudante.getNome());
-				dadosAtualizados.setMatricula(estudante.getMatricula());
-				dadosAtualizados.setCurso(estudante.getCurso());
-				repository.saveAndFlush(dadosAtualizados);
-				
-			}
-			
-		} catch (Exception e) {
-			throw e;
+			dadosAtualizados.setEmail(estudante.getEmail());
+			dadosAtualizados.setTelefone(estudante.getTelefone());
+			dadosAtualizados.setNome(estudante.getNome());
+			dadosAtualizados.setMatricula(estudante.getMatricula());
+			dadosAtualizados.setCurso(estudante.getCurso());
+			return Optional.of(repository.saveAndFlush(dadosAtualizados));
+		} else {
+			return Optional.empty();
 		}
 	}
 
