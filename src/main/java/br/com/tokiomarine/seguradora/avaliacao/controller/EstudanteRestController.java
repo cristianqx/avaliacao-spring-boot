@@ -18,27 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tokiomarine.seguradora.avaliacao.entidade.Estudante;
 import br.com.tokiomarine.seguradora.avaliacao.service.EstudanteServiceImpl;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
+@Api(value="API REST Estudantes")
 @RequestMapping("/estudantes")
 public class EstudanteRestController {
-
-	// TODO caso você não conheça THEMELEAF faça a implementação dos métodos em forma de RESTCONTROLLER 
-		//(seguindo o padrão RESTFUL)
-
-	// TODO IMPLEMENTAR CADASTRO DE ESTUDANTES (POST)
-
-	// TODO IMPLEMENTAR ATUALIZACAO DE ESTUDANTES (PUT)
-
-	// TODO IMPLEMENTAR A LISTAGEM DE ESTUDANTES (GET)
-
-	// TODO IMPLEMENTAR A EXCLUSÃO DE ESTUDANTES (DELETE)
 	
 	@Autowired
 	private EstudanteServiceImpl estudanteService;
 	
 	
 	@PostMapping(path="/cadastrar-estudante")
+	@ApiOperation(value="Cadastrar um novo estudantes")
 	public ResponseEntity<?> cadastrarEstudante(@Valid @RequestBody Estudante estudante) {
 		try {
 			
@@ -52,6 +45,7 @@ public class EstudanteRestController {
 	}
 	
 	@PutMapping(path="/atualizar-estudante")
+	@ApiOperation(value="Atualiza dados de um estudante já cadastrado")
 	public ResponseEntity<?> atualizarEstudante(@Valid @RequestBody Estudante estudante) {
 		
 		try {
@@ -68,6 +62,7 @@ public class EstudanteRestController {
 	}
 	
 	@DeleteMapping(path="/deletar-estudante/{id}")
+	@ApiOperation(value="Remove um estudante cadastrado")
 	public ResponseEntity<?> deletarEstudante(@Valid @PathVariable Long id) {
 		
 		try {
@@ -84,6 +79,7 @@ public class EstudanteRestController {
 	}
 	
 	@GetMapping(path="/buscar-estudantes")
+	@ApiOperation(value="Retorna uma lista de estudantes cadastrados")
 	public ResponseEntity<List<Estudante>> obterListaEstudantes() {
 		
 		try {
