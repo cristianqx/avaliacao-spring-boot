@@ -31,11 +31,11 @@ public class EstudanteServiceImpl implements EstudandeService {
 	}
 
 	@Override
-	public void atualizarEstudante(@Valid Estudante estudante) {
+	public void atualizarEstudante(@Valid Long id, @Valid Estudante estudante) {
 		
 		try {
 			
-			Optional<Estudante> dadosEstudante = repository.findById(estudante.getId());
+			Optional<Estudante> dadosEstudante = repository.findById(id);
 			
 			if(dadosEstudante.isPresent()) {
 				

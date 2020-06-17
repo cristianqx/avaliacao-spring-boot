@@ -44,13 +44,13 @@ public class EstudanteRestController {
 		}
 	}
 	
-	@PutMapping(path="/atualizar-estudante")
+	@PutMapping(path="/atualizar-estudante/{id}")
 	@ApiOperation(value="Atualiza dados de um estudante já cadastrado")
-	public ResponseEntity<?> atualizarEstudante(@Valid @RequestBody Estudante estudante) {
+	public ResponseEntity<?> atualizarEstudante(@Valid @PathVariable Long id, @Valid @RequestBody Estudante estudante) {
 		
 		try {
 			
-			estudanteService.atualizarEstudante(estudante); 
+			estudanteService.atualizarEstudante(id, estudante); 
 			
 			return ResponseEntity.ok().build();
 			
